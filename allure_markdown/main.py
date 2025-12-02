@@ -53,6 +53,70 @@ class AllureMarkdown:
         self.mds_append(f"{self.content_level(2)} Description")
         self.mds_append(self.description)
 
+    def append_attachments(self,attachments):
+        self.mds_append(f"{self.content_level(4)} Attachments")
+        for attachment in attachments:
+            name = attachment.get('name')
+            type = attachment.get('type')
+            source = attachment.get('source')
+            if type == "text/plain":
+                with open(os.path.join(self.metadata_path, source), 'r', encoding='utf-8') as f:
+                    self.mds_append(f"{name}")
+                    self.mds_append("```python", bland_line=False)
+                    self.mds_append(f"{f.read()}", bland_line=False)
+                    self.mds_append("```")
+            else:
+                self.mds_append(f"![{name}]({source})")
+
+    def append_steps(self, steps):
+        self.mds_append(f"{self.content_level(4)} Steps")
+
+        self.mds_append("<details>", bland_line=False)
+        self.mds_append(f"<summary><strong>Steps Details</strong></summary>", bland_line=False)
+        for step in steps:
+            name = step.get('name')
+            if name not in ["screenshot", "video"]:
+                self.mds_append(f"{name}", bland_line=False, new_line_symbol="html")
+        self.mds_append("</details>")
+
+        for step in steps:
+            name = step.get('name')
+            if name == "screenshot":
+                self.mds_append(f"{self.content_level(5)} ScreenShot")
+                for attachment in step.get('attachments'):
+                    self.mds_append(
+                        f"![{name}]({os.path.join(self.metadata_path, attachment.get('source'))})")
+            elif name == "video":
+                self.mds_append(f"{self.content_level(5)} Video")
+                for attachment in step.get('attachments'):
+                    self.mds_append(f"<video>", bland_line=False)
+                    self.mds_append(
+                        f"<source src={os.path.join(self.metadata_path, attachment.get('source'))} type=video/mp4>")
+                    self.mds_append(f"</video>")
+
+    def append_status_details(self, statusDetails):
+        self.mds_append("#### Status Details")
+        message = statusDetails.get('message')
+        if message:
+            self.mds_append("##### message")
+            self.mds_append("```python", bland_line=False)
+            self.mds_append(rf"{message}", bland_line=False)
+            self.mds_append("```")
+
+        trace = statusDetails.get('trace')
+        if trace:
+            self.mds_append("##### trace")
+            self.mds_append("```python", bland_line=False)
+            self.mds_append(rf"{trace}", bland_line=False)
+            self.mds_append("```")
+
+    def append_labels(self, labels):
+        self.mds_append(f"{self.content_level(4)} Labels")
+        self.mds_append("<details>", bland_line=False)
+        self.mds_append(f"<summary><strong>Labels Details</strong></summary>", bland_line=False)
+        for label in labels:
+            self.mds_append(f"{label.get('name')}: {label.get('value')}", bland_line=False, new_line_symbol="html")
+        self.mds_append("</details>")
     def append_cases(self):
         self.mds_append(f"{self.content_level(2)} Test Cases")
         json_files = self.get_json_files()
@@ -80,67 +144,16 @@ class AllureMarkdown:
                 self.mds_append(f"{status} {f'✅' if status == 'passed' else '❌'}")
 
                 if attachments:
-                    self.mds_append(f"{self.content_level(4)} Attachments")
-                    for attachment in attachments:
-                        name = attachment.get('name')
-                        type = attachment.get('type')
-                        source = attachment.get('source')
-                        if type == "text/plain":
-                            with open(os.path.join(self.metadata_path, source), 'r', encoding='utf-8') as f:
-                                self.mds_append(f"{name}")
-                                self.mds_append("```python", bland_line=False)
-                                self.mds_append(f"{f.read()}", bland_line=False)
-                                self.mds_append("```")
-                        else:
-                            self.mds_append(f"![{name}]({source})")
+                    self.append_attachments(attachments)
 
                 if steps:
-                    self.mds_append(f"{self.content_level(4)} Steps")
+                    self.append_steps(steps)
 
-                    self.mds_append("<details>", bland_line=False)
-                    self.mds_append(f"<summary><strong>Steps Details</strong></summary>", bland_line=False)
-                    for step in steps:
-                        name = step.get('name')
-                        if name not in ["screenshot", "video"]:
-                            self.mds_append(f"{name}", bland_line=False, new_line_symbol="html")
-                    self.mds_append("</details>")
-
-                    for step in steps:
-                        name = step.get('name')
-                        if name == "screenshot":
-                            self.mds_append(f"{self.content_level(5)} ScreenShot")
-                            for attachment in step.get('attachments'):
-                                self.mds_append(
-                                    f"![{name}]({os.path.join(self.metadata_path, attachment.get('source'))})")
-                        elif name == "video":
-                            self.mds_append(f"{self.content_level(5)} Video")
-                            for attachment in step.get('attachments'):
-                                self.mds_append(f"<video>", bland_line=False)
-                                self.mds_append(f"<source src={os.path.join(self.metadata_path, attachment.get('source'))} type=video/mp4>")
-                                self.mds_append(f"</video>")
                 if statusDetails:
-                    self.mds_append("#### Status Details")
-                    message = statusDetails.get('message')
-                    if message:
-                        self.mds_append("##### message")
-                        self.mds_append("```python", bland_line=False)
-                        self.mds_append(rf"{message}", bland_line=False)
-                        self.mds_append("```")
-
-                    trace = statusDetails.get('trace')
-                    if trace:
-                        self.mds_append("##### trace")
-                        self.mds_append("```python", bland_line=False)
-                        self.mds_append(rf"{trace}", bland_line=False)
-                        self.mds_append("```")
+                    self.append_status_details(statusDetails)
 
                 if labels:
-                    self.mds_append(f"{self.content_level(4)} Labels")
-                    self.mds_append("<details>", bland_line=False)
-                    self.mds_append(f"<summary><strong>Labels Details</strong></summary>", bland_line=False)
-                    for label in labels:
-                        self.mds_append(f"{label.get('name')}: {label.get('value')}", bland_line=False, new_line_symbol="html")
-                    self.mds_append("</details>")
+                    self.append_labels(labels)
 
     def merge_md(self):
         self.append_title()
