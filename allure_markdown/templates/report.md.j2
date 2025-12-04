@@ -1,0 +1,56 @@
+#  {{ title }}
+
+{{ custom_content }}
+
+## Description
+{{ description }}
+
+{% if environment %}
+## Environment
+
+| Name | Value |
+|------|-------|{% for key, value in environment.items() %}
+| {{ key }} | {{ value }} |{% endfor %}
+{% endif %}
+
+## Summary
+
+| Status | Count |
+|--------|-------|
+| Total | {{ summary.total }} |
+| Passed | {{ summary.passed }} |
+| Failed | {{ summary.failed }} |
+| Skipped | {{ summary.skipped }} |
+| Broken | {{ summary.broken }} |
+
+## Fail Details
+
+{% if fail_details %}
+{% for test in fail_details %}
+###  {{ test.name }}
+
+**Node ID:** {{ test.nodeid }}
+
+**Status:** {{ test.status }}
+
+**Error Message:**
+```
+{{ test.error_message }}
+```
+
+**Traceback:**
+```
+{{ test.traceback }}
+```
+
+{% if test.attachments %}
+**Attachments:**
+{% for attachment in test.attachments %}
+- [{{ attachment.name }}]({{ attachment.path }})
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% else %}
+No failed tests found.
+{% endif %}

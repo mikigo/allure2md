@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "allure-markdown"
+version = "0.1.0"
+description = "Convert Allure metadata to Markdown reports"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{ include = "allure_markdown" }]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+allure-pytest = "^2.13.2"
+pytest = "^7.0.0"
+jinja2 = "^3.1.2"
+click = "^8.1.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0.0"
+
+[tool.poetry.scripts]
+allure-markdown = "allure_markdown.cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,65 @@
+{
+  "name": "test_performance_check",
+  "status": "passed",
+  "description": "测试性能指标",
+  "attachments": [
+    {
+      "name": "执行耗时: 0.1031秒",
+      "source": "302388ea-e92f-434d-bac3-eb8d4695abde-attachment.txt",
+      "type": "text/plain"
+    },
+    {
+      "name": "响应时间在可接受范围内",
+      "source": "12176265-7dde-4593-900a-6905e781f5a2-attachment.txt",
+      "type": "text/plain"
+    }
+  ],
+  "start": 1764867758486,
+  "stop": 1764867758594,
+  "uuid": "4cbd8b71-a724-4792-8c0b-b38db7497e17",
+  "historyId": "b988a7f578f5e1def44434d4838655eb",
+  "testCaseId": "b988a7f578f5e1def44434d4838655eb",
+  "fullName": "tests.test_comprehensive#test_performance_check",
+  "labels": [
+    {
+      "name": "story",
+      "value": "响应时间"
+    },
+    {
+      "name": "feature",
+      "value": "性能测试"
+    },
+    {
+      "name": "parentSuite",
+      "value": "tests"
+    },
+    {
+      "name": "suite",
+      "value": "test_comprehensive"
+    },
+    {
+      "name": "host",
+      "value": "mikigo"
+    },
+    {
+      "name": "thread",
+      "value": "2540-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "tests.test_comprehensive"
+    }
+  ],
+  "titlePath": [
+    "tests",
+    "test_comprehensive.py"
+  ]
+}

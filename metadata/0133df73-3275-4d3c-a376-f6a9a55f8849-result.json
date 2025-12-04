@@ -1,0 +1,60 @@
+{
+  "name": "test_with_video",
+  "status": "passed",
+  "description": "测试带有视频附件",
+  "attachments": [
+    {
+      "name": "测试视频",
+      "source": "02a7029a-0215-462e-9018-2500f4b588c4-attachment.mp4",
+      "type": "video/mp4"
+    }
+  ],
+  "start": 1764867758476,
+  "stop": 1764867758477,
+  "uuid": "f935d851-c178-4c1e-a43c-64ea4c72574f",
+  "historyId": "ef215a8f9dff9d909bacd66ab6e8bfcd",
+  "testCaseId": "ef215a8f9dff9d909bacd66ab6e8bfcd",
+  "fullName": "tests.test_comprehensive#test_with_video",
+  "labels": [
+    {
+      "name": "feature",
+      "value": "附件测试"
+    },
+    {
+      "name": "story",
+      "value": "视频附件"
+    },
+    {
+      "name": "parentSuite",
+      "value": "tests"
+    },
+    {
+      "name": "suite",
+      "value": "test_comprehensive"
+    },
+    {
+      "name": "host",
+      "value": "mikigo"
+    },
+    {
+      "name": "thread",
+      "value": "2540-MainThread"
+    },
+    {
+      "name": "framework",
+      "value": "pytest"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    },
+    {
+      "name": "package",
+      "value": "tests.test_comprehensive"
+    }
+  ],
+  "titlePath": [
+    "tests",
+    "test_comprehensive.py"
+  ]
+}
