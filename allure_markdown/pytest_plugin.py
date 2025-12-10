@@ -44,7 +44,7 @@ def pytest_configure(config):
     )
 
 
-def pytest_session_finish(session, exitstatus):
+def pytest_sessionfinish(session, exitstatus):
     config = session.config
 
     if not config.getoption("--allure-markdown-generate"):

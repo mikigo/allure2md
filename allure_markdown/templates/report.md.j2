@@ -5,13 +5,15 @@
 ## Description
 {{ description }}
 
-{% if environment %}
+{%- if environment %}
 ## Environment
 
 | Name | Value |
-|------|-------|{% for key, value in environment.items() %}
-| {{ key }} | {{ value }} |{% endfor %}
-{% endif %}
+|------|-------|
+{%- for key, value in environment.items() %}
+| {{ key }} | {{ value }} |
+{%- endfor %}
+{%- endif %}
 
 ## Summary
 
@@ -24,9 +26,8 @@
 | Broken | {{ summary.broken }} |
 
 ## Fail Details
-
-{% if fail_details %}
-{% for test in fail_details %}
+{%- if fail_details %}
+{%- for test in fail_details %}
 ###  {{ test.name }}
 
 **Node ID:** {{ test.nodeid }}
@@ -34,23 +35,33 @@
 **Status:** {{ test.status }}
 
 **Error Message:**
-```
+```python
 {{ test.error_message }}
 ```
 
 **Traceback:**
-```
+```python
 {{ test.traceback }}
 ```
 
-{% if test.attachments %}
+{%- if test.attachments %}
 **Attachments:**
-{% for attachment in test.attachments %}
-- [{{ attachment.name }}]({{ attachment.path }})
-{% endfor %}
-{% endif %}
+{%- for attachment in test.attachments %}
+{%- if attachment.type == 'video/mp4' %}
+<video controls width="100%">
+    <source src="{{ attachment.path }}" type="video/mp4">
+</video>
+{%- elif attachment.type == 'image/png' %}
+![{{ attachment.name }}]({{ attachment.path }})
+{%- else %}
+```python
+{{attachment.content}}
+```
+{%- endif %}
+{%- endfor %}
+{%- endif %}
 
-{% endfor %}
-{% else %}
+{%- endfor %}
+{%- else %}
 No failed tests found.
-{% endif %}
+{%- endif %}

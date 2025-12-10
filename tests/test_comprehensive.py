@@ -48,7 +48,7 @@ def test_with_screenshot():
     with open(screenshot_path, 'rb') as f:
         allure.attach(f.read(), name="测试截图", attachment_type=allure.attachment_type.PNG)
 
-    assert True, "带有截图附件的测试成功"
+    assert False, "带有截图附件的测试成功"
 
 
 @allure.feature("附件测试")
@@ -64,7 +64,7 @@ def test_with_video():
     with open(video_path, 'rb') as f:
         allure.attach(f.read(), name="测试视频", attachment_type=allure.attachment_type.MP4)
 
-    assert True, "带有视频附件的测试成功"
+    assert False, "带有视频附件的测试成功"
 
 
 @allure.feature("综合测试")

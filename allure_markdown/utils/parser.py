@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 from typing import Dict, List, Tuple
 
 
@@ -38,7 +39,7 @@ def scan_allure_results(results_dir: str) -> Tuple[List[Dict], Dict[str, str]]:
     return test_results, environment
 
 
-def parse_test_results(test_results: List[Dict]) -> Tuple[Dict, List[Dict]]:
+def parse_test_results(test_results: List[Dict], results_dir, output) -> Tuple[Dict, List[Dict]]:
     summary = {
         'total': len(test_results),
         'passed': 0,
@@ -56,25 +57,42 @@ def parse_test_results(test_results: List[Dict]) -> Tuple[Dict, List[Dict]]:
             summary['passed'] += 1
         elif status == 'failed':
             summary['failed'] += 1
-            fail_details.append(_parse_fail_details(test))
+            fail_details.append(_parse_fail_details(test, results_dir, output))
         elif status == 'skipped':
             summary['skipped'] += 1
         elif status == 'broken':
             summary['broken'] += 1
-            fail_details.append(_parse_fail_details(test))
+            fail_details.append(_parse_fail_details(test, results_dir, output))
 
     return summary, fail_details
 
 
-def _parse_fail_details(test: Dict) -> Dict:
+def _parse_fail_details(test: Dict, results_dir, output) -> Dict:
     attachments = []
-
+    try:
+        output_dir = os.path.dirname(output)
+        os.makedirs(output_dir, exist_ok=True)
+    except:
+        output_dir = "."
     if 'attachments' in test:
         for attachment in test['attachments']:
-            attachments.append({
+
+            at = {
                 'name': attachment.get('name', 'Attachment'),
-                'path': attachment.get('source', '')
-            })
+                'path': attachment.get('source', ''),
+                'type': attachment.get('type', ''),
+            }
+
+            if attachment.get('type', '') == "text/plain":
+                with open(os.path.join(results_dir, attachment.get('source', '')), "r", encoding="utf-8") as f:
+                    at['content'] = f.read()
+            if attachment.get('type') in ("video/mp4", "image/png"):
+                # 拷贝到output_dir目录下
+                shutil.copyfile(
+                    os.path.join(results_dir, attachment.get('source')),
+                    os.path.join(output_dir, attachment.get('source'))
+                )
+            attachments.append(at)
 
     error_message = ''
     traceback = ''

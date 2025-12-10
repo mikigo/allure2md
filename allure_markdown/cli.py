@@ -32,7 +32,7 @@ def main(results_dir, output, title, description, custom_content):
             click.echo(f"Warning: No test results found in '{results_dir}'.")
             return 0
 
-        summary, fail_details = parse_test_results(test_results)
+        summary, fail_details = parse_test_results(test_results, results_dir, output)
 
         generate_markdown_report(
             summary=summary,
