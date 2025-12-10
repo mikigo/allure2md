@@ -80,6 +80,10 @@ pytest --alluredir=my-results --allure-markdown-generate --allure-markdown-title
 
 ## Markdown 报告内容
 
+查看报告示例：
+
+[](allure_markdown_report.md)
+
 生成的 Markdown 报告包含以下部分：
 
 ```markdown
