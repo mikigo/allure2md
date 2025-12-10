@@ -4,5 +4,4 @@ class _Config:
     metadata = "allure-results"
     output = "allure_markdown_report.md"
 
-
 config = _Config()

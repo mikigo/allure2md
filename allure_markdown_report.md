@@ -17,7 +17,6 @@ This is a markdown report generated from Allure metadata.
 | Passed | Failed | Skipped | Broken | Total |
 |--------|-------|--------|-------|--------|
 | 5 | 5 | 0 | 0 | 10 |
-
 ## Fail Details
 ###  test_allure_simple_failed
 
@@ -26,12 +25,14 @@ This is a markdown report generated from Allure metadata.
 **Status:** failed
 
 **Error Message:**
+
 ```python
 AssertionError: This test intentionally fails
 assert False
 ```
 
 **Traceback:**
+
 ```python
 @allure.feature("简单功能")
     def test_allure_simple_failed():
@@ -54,12 +55,14 @@ Test log
 **Status:** failed
 
 **Error Message:**
+
 ```python
 AssertionError: This test intentionally fails
 assert False
 ```
 
 **Traceback:**
+
 ```python
 def test_simple_failed():
         """Simple test that fails"""
@@ -76,12 +79,14 @@ tests\test_simple.py:8: AssertionError
 **Status:** failed
 
 **Error Message:**
+
 ```python
 AssertionError: 带有截图附件的测试成功
 assert False
 ```
 
 **Traceback:**
+
 ```python
 @allure.feature("附件测试")
     @allure.story("截图附件")
@@ -112,12 +117,14 @@ tests\test_comprehensive.py:51: AssertionError
 **Status:** failed
 
 **Error Message:**
+
 ```python
 AssertionError: 带有视频附件的测试成功
 assert False
 ```
 
 **Traceback:**
+
 ```python
 @allure.feature("附件测试")
     @allure.story("视频附件")
@@ -139,6 +146,7 @@ E       assert False
 tests\test_comprehensive.py:67: AssertionError
 ```
 **Attachments:**
+
 <video controls width="100%">
     <source src="d51a2056-50b4-4e11-8b8f-10204bd8258d-attachment.mp4" type="video/mp4">
 </video>
@@ -149,12 +157,14 @@ tests\test_comprehensive.py:67: AssertionError
 **Status:** failed
 
 **Error Message:**
+
 ```python
 AssertionError: 测试失败，原因: division by zero
 assert False
 ```
 
 **Traceback:**
+
 ```python
 @allure.feature("综合测试")
     @allure.story("失败场景")

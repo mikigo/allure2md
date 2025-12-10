@@ -21,8 +21,9 @@
 |--------|-------|--------|-------|--------|
 | {{ summary.passed }} | {{ summary.failed }} | {{ summary.skipped }} | {{ summary.broken }} | {{ summary.total }} |
 
-## Fail Details
 {%- if fail_details %}
+## Fail Details
+
 {%- for test in fail_details %}
 ###  {{ test.name }}
 
@@ -31,11 +32,13 @@
 **Status:** {{ test.status }}
 
 **Error Message:**
+
 ```python
 {{ test.error_message }}
 ```
 
 **Traceback:**
+
 ```python
 {{ test.traceback }}
 ```
@@ -44,9 +47,11 @@
 **Attachments:**
 {%- for attachment in test.attachments %}
 {%- if attachment.type == 'video/mp4' %}
+
 <video controls width="100%">
     <source src="{{ attachment.path }}" type="video/mp4">
 </video>
+
 {%- elif attachment.type == 'image/png' %}
 ![{{ attachment.name }}]({{ attachment.path }})
 {%- else %}
@@ -58,6 +63,4 @@
 {%- endif %}
 
 {%- endfor %}
-{%- else %}
-No failed tests found.
 {%- endif %}
