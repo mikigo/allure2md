@@ -4,16 +4,19 @@ url:https://mikigo.site
 
 ## Description
 This is a markdown report generated from Allure metadata.
+## Environment
+
+| Name | Value |
+|------|-------|
+| System | Windows |
+| version | 10 |
+| Python | 3.8 |
 
 ## Summary
 
-| Status | Count |
-|--------|-------|
-| Total | 10 |
-| Passed | 5 |
-| Failed | 5 |
-| Skipped | 0 |
-| Broken | 0 |
+| Passed | Failed | Skipped | Broken | Total |
+|--------|-------|--------|-------|--------|
+| 5 | 5 | 0 | 0 | 10 |
 
 ## Fail Details
 ###  test_allure_simple_failed

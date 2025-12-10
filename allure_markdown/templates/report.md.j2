@@ -17,13 +17,9 @@
 
 ## Summary
 
-| Status | Count |
-|--------|-------|
-| Total | {{ summary.total }} |
-| Passed | {{ summary.passed }} |
-| Failed | {{ summary.failed }} |
-| Skipped | {{ summary.skipped }} |
-| Broken | {{ summary.broken }} |
+| Passed | Failed | Skipped | Broken | Total |
+|--------|-------|--------|-------|--------|
+| {{ summary.passed }} | {{ summary.failed }} | {{ summary.skipped }} | {{ summary.broken }} | {{ summary.total }} |
 
 ## Fail Details
 {%- if fail_details %}
