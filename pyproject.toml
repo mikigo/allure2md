@@ -35,3 +35,23 @@ version = { path = "allure_markdown/__version__.py" }
 packages = [
     "/allure_markdown",
 ]
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/.venv",
+  "/.env",
+  "/.idea",
+  "/.pytest_cache",
+  "/.gitignore",
+  "/dist",
+  "/docs",
+  "/tests",
+  "/d51a2056-50b4-4e11-8b8f-10204bd8258d-attachment.mp4",
+  "/78efcf09-b11b-49d5-80ac-1b5fb55652ac-attachment.png",
+  "/allure_markdown_report.md",
+  "/debug.py",
+  "/run.py",
+  "/pytest.ini",
+  "/metadata",
+  "/publish.bat",
+]
