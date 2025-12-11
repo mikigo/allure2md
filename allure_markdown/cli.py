@@ -7,6 +7,7 @@ from allure_markdown.main import AllureMarkdown
 
 
 @click.command()
+@click.help_option("-h", "--help", help="查看帮助信息")
 @click.option('--results-dir', '-r', default=None,
               help=f'Path to allure metadata results directory (default: {config.results_dir})')
 @click.option('--output', '-o', default=None, help=f'Output markdown file path (default: {config.output})')

@@ -1,6 +1,6 @@
 [project]
 name = "allure-markdown"
-description = ""
+description = "将 Allure 的元数据转换为 Markdown 格式的报告"
 authors = [
     { name = "mikigo", email = "mikigo@foxmail.com" },
 ]
@@ -18,7 +18,7 @@ license = { text = "GPL2.0" }
 [project.optional-dependencies]
 
 [project.scripts]
-allure-markdown = "allure_markdown.cli:main"
+allure-markdown = "allure_markdown.cli:cli"
 
 [project.entry-points.pytest11]
 allure_markdown_plugin = "allure_markdown.pytest_plugin"
