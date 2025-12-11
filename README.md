@@ -1,5 +1,9 @@
 # Allure-Markdown
 
+![PyPI](https://img.shields.io/pypi/v/allure-markdown)
+![Downloads](https://img.shields.io/pypi/dm/allure-markdown)
+![License](https://img.shields.io/pypi/l/allure-markdown)
+
 Allure-Markdown 是一个 Python 项目，能将 Allure 的元数据转换为 Markdown 格式的报告。
 
 ## 功能特性
