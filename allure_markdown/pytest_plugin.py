@@ -1,7 +1,7 @@
 import os
 
-from allure_markdown.utils.parser import scan_allure_results, parse_test_results
-from allure_markdown.utils.report_generator import generate_markdown_report
+from allure_markdown.config import config
+from allure_markdown.main import AllureMarkdown
 
 
 def pytest_addoption(parser):
@@ -14,23 +14,23 @@ def pytest_addoption(parser):
     )
     group.addoption(
         "--allure-markdown-title",
-        default="Allure Markdown Report",
+        default=config.title,
         help="Title for the generated markdown report"
     )
     group.addoption(
         "--allure-markdown-description",
-        default="This is a markdown report generated from Allure metadata",
+        default=config.description,
         help="Description for the generated markdown report"
     )
     group.addoption(
         "--allure-markdown-output",
-        default="allure_report.md",
+        default=config.output,
         help="Output path for the generated markdown report"
     )
     group.addoption(
-        "--allure-markdown-results-dir",
-        default="allure-results",
-        help="Path to allure results directory"
+        "--allure-markdown-custom-content",
+        default="",
+        help="Custom content to add after title"
     )
 
 
@@ -44,47 +44,26 @@ def pytest_configure(config):
     )
 
 
-def pytest_sessionfinish(session, exitstatus):
+def pytest_sessionfinish(session):
     config = session.config
 
     if not config.getoption("--allure-markdown-generate"):
         return
 
-    results_dir = config.getoption("--allure-markdown-results-dir")
-
-    if not os.path.exists(results_dir):
-        session.config.pluginmanager.getplugin("terminalreporter").write(
-            f"\nWARNING: Allure results directory '{results_dir}' not found. No markdown report generated.\n"
-        )
-        return
-
+    results_dir = config.getoption("--alluredir")
     title = config.getoption("--allure-markdown-title")
     description = config.getoption("--allure-markdown-description")
-    output_path = config.getoption("--allure-markdown-output")
+    output = config.getoption("--allure-markdown-output")
+    custom_content = config.getoption("--allure-markdown-custom-content")
 
     try:
-        test_results, environment = scan_allure_results(results_dir)
-
-        if not test_results:
-            session.config.pluginmanager.getplugin("terminalreporter").write(
-                f"\nWARNING: No test results found in '{results_dir}'. No markdown report generated.\n"
-            )
-            return
-
-        summary, fail_details = parse_test_results(test_results)
-
-        generate_markdown_report(
-            summary=summary,
-            fail_details=fail_details,
-            environment=environment,
+        AllureMarkdown(
+            results_dir=results_dir,
+            output=output,
             title=title,
             description=description,
-            output_path=output_path
-        )
-
-        session.config.pluginmanager.getplugin("terminalreporter").write(
-            f"\nAllure-Markdown: Report generated successfully at '{output_path}'\n"
-        )
+            custom_content=custom_content,
+        ).gen()
 
     except Exception as e:
         session.config.pluginmanager.getplugin("terminalreporter").write(

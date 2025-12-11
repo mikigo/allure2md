@@ -10,11 +10,6 @@ Allure-Markdown 是一个 Python 项目，能将 Allure 的元数据转换为 Ma
 - 提供命令行一键转换
 - 美观易读的 Markdown 输出格式
 
-## 依赖
-
-- jinja2
-- click
-
 ## 安装
 
 使用pip安装：
@@ -34,7 +29,7 @@ allure-markdown [OPTIONS]
 **参数说明：**
 
 - `--results-dir, -r`: Allure结果目录路径（默认：allure-results）
-- `--output, -o`: 输出Markdown文件路径（默认：allure_report.md）
+- `--output, -o`: 输出Markdown文件路径（默认：allure_markdown_report.md）
 - `--title, -t`: 报告标题（默认：Allure Markdown Report）
 - `--description, -d`: 报告描述（默认：This is a markdown report generated from Allure metadata）
 - `--custom-content, -c`: 标题后添加的自定义内容（默认：无）

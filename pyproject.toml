@@ -2,7 +2,7 @@
 name = "allure-markdown"
 description = ""
 authors = [
-    { name = "mikigo", email = "1964191531@qq.com" },
+    { name = "mikigo", email = "mikigo@foxmail.com" },
 ]
 dependencies = [
     "jinja2",

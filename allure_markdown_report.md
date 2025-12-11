@@ -1,6 +1,6 @@
 #  Allure Markdown Report
 
-url:https://mikigo.site
+url: https://mikigo.site
 
 ## Description
 This is a markdown report generated from Allure metadata.
