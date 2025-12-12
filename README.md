@@ -65,7 +65,7 @@ pytest --alluredir=allure-results --allure-markdown-generate
 - `--allure-markdown-title`: 生成的Markdown报告标题
 - `--allure-markdown-description`: 生成的Markdown报告描述
 - `--allure-markdown-output`: 生成的Markdown报告输出路径
-- `--allure-markdown-results-dir`: Allure结果目录路径
+- `--allure-markdown-custom-content`: 标题后添加的自定义内容
 
 **示例：**
 
